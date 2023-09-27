@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "GrpcChatServiceApp": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5031;https://localhost:7135",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+﻿syntax = "proto3";
+
+package communication;
+
+service ChatCommunication {
+  rpc HandleCommunication(stream UserMessage) returns (stream ServerMessage);
+}
+//////////////////UserMessage//////////////////////////
+message UserMessage {
+  oneof content {
+	UserMessageLogin login = 1;
+	UserMessageLogout logout = 2;
+	UserMessageChatConnect chat_connect = 3;
+	UserMessageChat chat = 4;
+	UserMessageChatDisconnect chat_disconnect = 5;
+  }
+}
+
+///Login and Logout 
+message UserMessageLogin {
+  string user_name = 1;
+}
+
+message UserMessageLogout{
+	string user_id = 1;
+}
+///
+
+///Chat 
+message UserMessageChatConnect{
+  string chat_room_id = 1;
+  string user_id = 2;
+}
+message UserMessageChatDisconnect{
+  string chat_room_id = 1;
+  string user_id = 2;
+}
+
+message UserMessageChat {
+  string text = 1;
+}
+///
+
+/////////////////////////////////////////////////////////
+
+///////////////ServerMessage/////////////////////////////
+message ServerMessage {
+  oneof content {
+	ServerMessageLoginSuccess login_success = 1;
+	ServerMessageError server_error = 2;
+	ServerMessageSuccess success_message = 3;
+	ServerMessageChat chat = 4;
+  }
+}
+
+///General Server Message
+message ServerMessageError {
+	string errorMessage = 1;
+}
+
+message ServerMessageSuccess {
+	string successMessage = 1;
+}
+///
+
+///Login and Logout 
+message ServerMessageLoginSuccess {
+	string user_id = 1;
+}
+///
+
+/// Chat
+message ServerMessageChat {
+  string text = 1;
+  string user_name = 2;
+}
+///
+
+/////////////////////////////////////////////////////////
+
